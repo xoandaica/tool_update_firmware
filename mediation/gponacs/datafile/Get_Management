@@ -1,0 +1,7 @@
+1-ACSURL-InternetGatewayDevice.ManagementServer.URL-xsd:string
+2-ACSUsername-InternetGatewayDevice.ManagementServer.Username-xsd:string
+3-ACSPassword-InternetGatewayDevice.ManagementServer.Password-xsd:string
+4-PeriodicInformEnable-InternetGatewayDevice.ManagementServer.PeriodicInformEnable-xsd:boolean
+5-PeriodicInformInterval-InternetGatewayDevice.ManagementServer.PeriodicInformInterval-xsd:unsignedInt
+6-ConnectionRequestUsername-InternetGatewayDevice.ManagementServer.ConnectionRequestUsername-xsd:string
+7-ConnectionRequestPassword-InternetGatewayDevice.ManagementServer.ConnectionRequestPassword-xsd:string

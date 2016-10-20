@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is JAX-WS RI 2.2.9-b130926.1035 svn-revision#5f6196f2b90e9460065a4c2f4e30e065b245e51e. --><xs:schema xmlns:tns="http://services.stbacs.mediation.nms.ssdc.vnpttech.vn/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://services.stbacs.mediation.nms.ssdc.vnpttech.vn/">
+
+<xs:complexType name="basicResponse">
+<xs:complexContent>
+<xs:extension base="tns:templResponse">
+<xs:sequence>
+<xs:element name="Results" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Item" type="tns:namedKeyValue" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="templResponse" abstract="true">
+<xs:sequence>
+<xs:element name="errorCode" type="xs:int"></xs:element>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="namedKeyValue">
+<xs:sequence>
+<xs:element name="key" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="value" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deviceInfoResponse">
+<xs:complexContent>
+<xs:extension base="tns:basicResponse">
+<xs:sequence>
+<xs:element name="deviceInfo" type="tns:deviceInfo" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="deviceInfo">
+<xs:sequence>
+<xs:element name="cpePassword" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="cpeStatus" type="xs:int"></xs:element>
+<xs:element name="cpeUsername" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="cpu" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="description" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="firmwareStatus" type="xs:int"></xs:element>
+<xs:element name="firmwareVersion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="hardwareVersion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="id" type="xs:long"></xs:element>
+<xs:element name="mac" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="manufacturer" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="modelName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="oid" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="policyName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="productClass" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="provisioningCode" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="ram" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="rom" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="serialNumber" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="softwareVersion" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="arrayList">
+<xs:complexContent>
+<xs:extension base="tns:abstractList">
+<xs:sequence></xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="abstractList" abstract="true">
+<xs:complexContent>
+<xs:extension base="tns:abstractCollection">
+<xs:sequence></xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="abstractCollection" abstract="true">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+</xs:schema>

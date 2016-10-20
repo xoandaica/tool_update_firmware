@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Version Updated="17-07-2015 22:32:47">
+<target>bcm7241</target>
+<model>iGate IP001HD</model>
+<romVersion>1.059</romVersion>
+<attribute>normal</attribute>
+<releaseNote>This is test version 1.058</releaseNote>
+<firmwarePath>http://172.24.104.198/iGateIP001HD/</firmwarePath>
+<url rel="alternate" href="http://ota.vnpt-technology.vn/MyTV" />
+</Version>

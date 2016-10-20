@@ -1,0 +1,7 @@
+1-HardwareVersion-InternetGatewayDevice.DeviceInfo.HardwareVersion-xsd:string
+2-SoftwareVersion-InternetGatewayDevice.DeviceInfo.SoftwareVersion-xsd:string
+3-ProvisioningCode-InternetGatewayDevice.DeviceInfo.ProvisioningCode-xsd:string
+4-SerialNumber-InternetGatewayDevice.DeviceInfo.SerialNumber-xsd:string
+5-ModelName-InternetGatewayDevice.DeviceInfo.ModelName-xsd:string
+6-Manufacturer-InternetGatewayDevice.DeviceInfo.Manufacturer-xsd:string
+

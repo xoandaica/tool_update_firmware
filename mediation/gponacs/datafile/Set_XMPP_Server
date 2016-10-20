@@ -1,0 +1,4 @@
+Device.XMPP.Connection.1.Server.1
+1-Enable-Enable-xsd:boolean
+2-ServerAddress-ServerAddress-xsd:string
+3-ServerPort-Port-xsd:unsignedInt

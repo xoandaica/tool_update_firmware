@@ -1,0 +1,11 @@
+InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.X_BROADCOM_COM_WlanAdapter.WlVirtIntfCfg
+1-WlSsid-WlSsid-xsd:string
+2-WlAuthMode-WlAuthMode-xsd:string
+3-WlWpaGTKRekey-WlWpaGTKRekey-xsd:int
+4-WlRadiusServerIP-WlRadiusServerIP-xsd:string
+5-WlRadiusKey-WlRadiusKey-xsd:string
+6-WlRadiusPort-WlRadiusPort-xsd:int
+7-WlWpa-WlWpa-xsd:string
+8-WlWep-WlWep-xsd:string
+9-WlPreauth-WlPreauth-xsd:int
+10-WlNetReauth-WlNetReauth-xsd:int

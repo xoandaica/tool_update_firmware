@@ -1,0 +1,8 @@
+InternetGatewayDevice.Layer3Forwarding.Forwarding
+1-Gateway-GatewayIPAddress-xsd:string
+2-SubnetMask-DestSubnetMask-xsd:string
+3-Interface-Interface-xsd:string
+4-ForwardingPolicy-ForwardingPolicy-xsd:int
+5-DestIP-DestIPAddress-xsd:string
+6-Metric-ForwardingMetric-xsd:int
+7-Enable-Enable-xsd:boolean

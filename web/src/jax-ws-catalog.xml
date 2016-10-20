@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://stbnms-acs:9000/acsService?wsdl" uri="wsdl/stbnms-acs_9000/acsService.wsdl"/>
+    <system systemId="http://stbnms-acs:9000/acsService?xsd=1" uri="wsdl/stbnms-acs_9000/acsService.xsd_1.xsd"/>
+    <system systemId="http://localhost:82/acsService?wsdl" uri="wsdl/localhost_82/acsService.wsdl"/>
+    <system systemId="http://localhost:82/acsService?xsd=1" uri="wsdl/localhost_82/acsService.xsd_1.xsd"/>
+</catalog>

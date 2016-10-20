@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">admin</property>
+        <property name="hibernate.connection.url">jdbc:mysql://10.84.8.33:3306/joomla</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    
+        <!--Connection Pooling-->
+        <property name="c3p0.validate">true</property>
+        <property name="c3p0.min_size">10</property>
+        <property name="c3p0.max_size">600</property>
+        <property name="c3p0.timeout">1800</property> <!-- seconds --> 
+        <property name="c3p0.max_statements">50</property>
+        <property name="c3p0.preferredTestQuery">SELECT 1;</property>
+        <property name="c3p0.testConnectionOnCheckout">true</property>
+        <property name="c3p0.idle_test_period">3000</property> <!-- seconds --> 
+    
+        <property name="connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
+        <property name="connection.autoReconnect">true</property>
+        <property name="connection.autoReconnectForPools">true</property>
+        <property name="connection.is-connection-validation-required">true</property>
+    
+        <property name="show_sql">true</property>
+        <mapping resource="vn/vnpttech/ssdc/nms/xmpp/model/Rosterusers.hbm.xml"/>
+        <mapping resource="vn/vnpttech/ssdc/nms/xmpp/model/Users.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>
