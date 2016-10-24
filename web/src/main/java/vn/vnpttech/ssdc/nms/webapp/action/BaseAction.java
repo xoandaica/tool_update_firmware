@@ -35,6 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import vn.vnpttech.ssdc.nms.service.PolicyHistoryManager;
+import vn.vnpttech.ssdc.nms.service.ReportTemplateManager;
 
 public class BaseAction extends ActionSupport {
 
@@ -106,6 +107,9 @@ public class BaseAction extends ActionSupport {
      */
     @Autowired
     protected PolicyManager policyManager;
+    
+    
+    protected ReportTemplateManager reportTemplateManager;
 
     /**
      * Indicator if the user clicked cancel
@@ -270,6 +274,15 @@ public class BaseAction extends ActionSupport {
     public void setPolicyManager(PolicyManager policyManager) {
         this.policyManager = policyManager;
     }
+
+    public ReportTemplateManager getReportTemplateManager() {
+        return reportTemplateManager;
+    }
+
+    public void setReportTemplateManager(ReportTemplateManager reportTemplateManager) {
+        this.reportTemplateManager = reportTemplateManager;
+    }
+    
 
     /**
      * Convenience method for setting a "from" parameter to indicate the
