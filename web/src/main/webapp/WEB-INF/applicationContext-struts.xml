@@ -42,5 +42,9 @@
     <bean id="policyAction" class="vn.vnpttech.ssdc.nms.webapp.action.PolicyAction" scope="prototype"/>
     <bean id="actionLogAction" class="vn.vnpttech.ssdc.nms.webapp.action.ActionLogAction" scope="prototype"/>
     <bean id="reportAction" class="vn.vnpttech.ssdc.nms.webapp.action.ReportAction" scope="prototype"/>
+    
+    <bean id="reportTemplatetAction" class="vn.vnpttech.ssdc.nms.webapp.action.ReportTemplateAction" scope="prototype">
+        <property name="reportTemplateManager" ref="reportTemplateManager"/>
+    </bean>
 
 </beans>

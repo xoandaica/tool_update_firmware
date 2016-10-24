@@ -22,6 +22,7 @@
             <!--<Item name="Device" title="menu.management.device" page="/management/device"/>-->
         </Menu>
         <Menu name="UserMenu" title="menu.user" description="User Menu" page="/editProfile" roles="ROLE_ADMIN,ROLE_USER"/>
+        <Menu name="reportMenu" title="menu.report.title" description="Report Menu" page="/report/reportList" roles="ROLE_ADMIN,ROLE_USER"/>
         <!--new menu add here-->
         <Menu name="Logout" title="menu.logout" page="/logout" roles="ROLE_ADMIN,ROLE_USER"/>
     </Menus>

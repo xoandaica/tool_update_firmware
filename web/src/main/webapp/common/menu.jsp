@@ -9,6 +9,7 @@
             <menu:displayMenu name="AdminMenu"/>
             <menu:displayMenu name="ManagementMenu"/>
             <menu:displayMenu name="UserMenu"/>
+            <menu:displayMenu name="reportMenu" />
             <menu:displayMenu name="Logout"/>
         </ul>
     </div>
