@@ -24,5 +24,6 @@
         <mapping class="vn.vnpttech.ssdc.nms.model.UpdateFirmwareLogs"/>
         <mapping class="vn.vnpttech.ssdc.nms.model.AreaDeviceMapping"/>
         <mapping class="vn.vnpttech.ssdc.nms.model.ServiceLog"/>
+        <mapping class="vn.vnpttech.ssdc.nms.model.ReportTemplate"/>
     </session-factory>
 </hibernate-configuration>

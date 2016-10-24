@@ -17,7 +17,6 @@ package vn.vnpttech.ssdc.nms.dao.hibernate;
 
 import java.util.ArrayList;
 import java.util.List;
-import static javax.ws.rs.core.Response.status;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;

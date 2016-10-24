@@ -17,8 +17,6 @@ package vn.vnpttech.ssdc.nms.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import vn.vnpttech.ssdc.nms.dao.DeviceDao;
-import vn.vnpttech.ssdc.nms.dao.GenericDao;
 import vn.vnpttech.ssdc.nms.dao.ServiceLogDao;
 import vn.vnpttech.ssdc.nms.model.ServiceLog;
 import vn.vnpttech.ssdc.nms.service.ServiceLogManager;

@@ -16,7 +16,6 @@
 package vn.vnpttech.ssdc.nms.service;
 
 import java.util.List;
-import vn.vnpttech.ssdc.nms.model.Device;
 import vn.vnpttech.ssdc.nms.model.ServiceLog;
 
 /**

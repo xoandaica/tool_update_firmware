@@ -15,10 +15,7 @@
  */
 package vn.vnpttech.ssdc.nms.dao;
 
-import java.util.Date;
 import java.util.List;
-import vn.vnpttech.ssdc.nms.criteria.ActionLogsCriteria;
-import vn.vnpttech.ssdc.nms.model.ActionLogs;
 import vn.vnpttech.ssdc.nms.model.ServiceLog;
 
 /**

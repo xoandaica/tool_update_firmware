@@ -32,6 +32,8 @@
     </bean>
     <bean id="serviceLogDao" class="vn.vnpttech.ssdc.nms.dao.hibernate.ServiceLogDaoHibernate">
     </bean>
+    <bean id="reportTemplateDao" class="vn.vnpttech.ssdc.nms.dao.hibernate.ReportTemplateDaoHibernate">
+    </bean>
     
     <!-- Add new Managers here -->
     <bean id="actionLogsManager" class="vn.vnpttech.ssdc.nms.service.impl.ActionLogsManagerImpl">
@@ -60,5 +62,8 @@
     </bean>
     <bean id="serviceLogManager" class="vn.vnpttech.ssdc.nms.service.impl.ServiceLogManagerImpl">
         <constructor-arg ref="serviceLogDao" />
+    </bean>
+    <bean id="reportTemplateManager" class="vn.vnpttech.ssdc.nms.service.impl.ReportTemplateManagerImpl">
+        <constructor-arg ref="reportTemplateDao" />
     </bean>
 </beans>
