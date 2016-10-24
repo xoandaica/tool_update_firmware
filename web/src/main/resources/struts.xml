@@ -388,7 +388,7 @@
                 <param name="inputName">configAcsUrl</param>
             </result>
         </action>
-          <action name="getStaticRoute" class="deviceAction">
+        <action name="getStaticRoute" class="deviceAction">
             <result type="stream">
                 <param name="inputName">staticRoute</param>
             </result>
@@ -419,5 +419,21 @@
             </result>
         </action>
         
+    </package>
+    
+    <package name="report" extends="default" namespace="/report">
+        <action name="reportList" class="reportTemplatetAction" method="list">
+            <result name="success">/WEB-INF/pages/report/reportList.jsp</result>
+        </action>
+        <action name="dataReportGrid" class="reportTemplatetAction">
+            <result type="stream">
+                <param name="inputName">dataReportGrid</param>
+            </result>
+        </action>
+        <action name="getReportTime" class="reportTemplatetAction">
+            <result type="stream">
+                <param name="inputName">ReportTime</param>
+            </result>
+        </action>
     </package>
 </struts>
