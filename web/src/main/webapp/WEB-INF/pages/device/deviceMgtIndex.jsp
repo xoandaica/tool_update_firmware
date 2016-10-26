@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" type="text/css"
-	href="/scripts/extjs/ux/css/BoxSelect.css" />
+	href="/upgradefw/scripts/extjs/ux/css/BoxSelect.css" />
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

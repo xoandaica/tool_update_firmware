@@ -3,10 +3,14 @@
     Created on : May 29, 2015, 11:10:45 AM
     Author     : longdq
 --%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>--%>
+<%@ include file="/common/taglibs.jsp"%>
 
-<script>
-    Ext.Loader.setPath('Ext.ux', '/scripts/extjs/ux');
+
+<script type="text/javascript">
+    <c:set var="context2" value="${pageContext.request.contextPath}" />
+
+    Ext.Loader.setPath('Ext.ux', '${context2}/scripts/extjs/ux');
     Ext.require(['Ext.grid.*', 'Ext.data.*', 'Ext.ux.form.MultiSelect',
         'Ext.ux.form.ItemSelector', 'Ext.ux.ajax.JsonSimlet',
         'Ext.ux.ajax.SimManager',
@@ -113,7 +117,7 @@
             {
                 text: '<fmt:message key="common.button.reset"/>',
                 id: 'reset123',
-                handler: function () {
+                handler: function() {
                     formSearch.getForm().reset();
                 }
             }
@@ -194,7 +198,7 @@
         ],
         buttons: [{
                 text: 'Upload',
-                handler: function () {
+                handler: function() {
                     if (Ext.getCmp('file').getRawValue() == "" || versionUpload.getValue() == ""
                             || modelUpload.getValue() == null)
                     {
@@ -210,7 +214,7 @@
                             fwModel: modelUpload.getValue()
                         },
                         waitMsg: 'Uploading your file...',
-                        handleResponse: function (response) {
+                        handleResponse: function(response) {
 
                             myMsg = response.responseText.toString();
 
@@ -222,12 +226,12 @@
                                 return {success: false};
                             }
                         },
-                        success: function (fp) {
+                        success: function(fp) {
                             ExtWnms.alertSuccess('Processed file on the server');
                             firmwareGridStore.reload();
                             uploadForm.getForm().reset();
                         },
-                        failure: function (form, action) {
+                        failure: function(form, action) {
                             //uploadForm.getForm().reset()
                             Ext.Msg.alert('Failure', "Upload fail. Please try again.");
                         }
@@ -237,7 +241,7 @@
             {
                 text: 'Reset',
                 id: 'reset',
-                handler: function () {
+                handler: function() {
                     uploadForm.getForm().reset();
                 }
             }
@@ -280,13 +284,13 @@
             }
         },
         listeners: {
-            'beforeload': function (store, options) {
+            'beforeload': function(store, options) {
                 this.proxy.extraParams.startDate = startDate.getRawValue();
                 this.proxy.extraParams.endDate = endDate.getRawValue();
                 this.proxy.extraParams.model = modelSearch.getValue();
                 this.proxy.extraParams.version = version.getValue();
             },
-            load: function (store, records, success) {
+            load: function(store, records, success) {
 //                if (!success) {
 //                    var msgr = '<fmt:message key="ajax.failed"/>';
 //                    Ext.MessageBox.show({title: 'Warning', msg: msgr, buttons: Ext.MessageBox.OK, icon: Ext.Msg.WARNING});
@@ -311,14 +315,14 @@
         viewConfig: {
             stripeRows: true,
             enableTextSelection: true,
-            getRowClass: function (record) {
+            getRowClass: function(record) {
                 if (record.get('fwDefault') == 1)
                     return "default-color-row";
             }
         },
         columns: [
             Ext.create('Ext.grid.RowNumberer', {
-                renderer: function (v, p, record, rowIndex) {
+                renderer: function(v, p, record, rowIndex) {
                     if (this.rowspan) {
                         p.cellAttr = 'rowspan="' + this.rowspan + '"';
                     }
@@ -331,15 +335,15 @@
                 width: 65,
                 items: [
                     {
-                        icon: "/styles/icons/fam/delete.gif",
+                        icon: "${context2}/styles/icons/fam/delete.gif",
                         tooltip: '<fmt:message key="button.delete"/>',
-                        handler: function (grid, rowIndex, colIndex) {
+                        handler: function(grid, rowIndex, colIndex) {
                             var rec = grid.getStore().getAt(rowIndex);
                             if (rec.get('policies') != "") {
                                 ExtWnms.alertError("<fmt:message key="message.firmware.nodelete3"/>" + rec.get('policies'));
                                 return;
                             } else {
-                                Ext.MessageBox.confirm('<fmt:message key="message.confirm"/>', "<fmt:message key="message.delete.confirm"/>", function (btn) {
+                                Ext.MessageBox.confirm('<fmt:message key="message.confirm"/>', "<fmt:message key="message.delete.confirm"/>", function(btn) {
                                     if (btn == 'yes') {
                                         if (rec.get('usageNo') != 0) {
                                             ExtWnms.alertError("<fmt:message key="message.firmware.nodelete"/>");
@@ -358,9 +362,9 @@
 
                         }
                     }, {//edit
-                        icon: '/styles/icons/fam/edit_16x16.png',
+                        icon: '${context2}/styles/icons/fam/edit_16x16.png',
                         tooltip: '<fmt:message key="button.edit"/>',
-                        handler: function (grid, rowIndex, colIndex) {
+                        handler: function(grid, rowIndex, colIndex) {
                             var rec = grid.getStore().getAt(rowIndex);
                             fwModel.setReadOnly(true);
                             fwVersion.setReadOnly(true);
@@ -432,14 +436,13 @@
                 align: 'left',
                 hidden: false,
                 dataIndex: 'id',
-                renderer: function (value) {
+                renderer: function(value) {
                     return {
                         xtype: 'button',
                         text: '<fmt:message key="management.firmware.defaultbtn"/>',
-                        
-                        handler: function () {
+                        handler: function() {
                             //Code to here
-                            Ext.MessageBox.confirm('<fmt:message key="message.confirm"/>', "<fmt:message key="management.firmware.resetConfirm"/>", function (btn) {
+                            Ext.MessageBox.confirm('<fmt:message key="message.confirm"/>', "<fmt:message key="management.firmware.resetConfirm"/>", function(btn) {
                                 if (btn == 'yes') {
                                     // UserController.resetPassword(value);
                                     FirmwareController.setDefault(value);
@@ -453,8 +456,8 @@
         tbar: [
             {
                 text: '<fmt:message key="button.add"/>',
-                icon: '/images/icons/add.png',
-                handler: function () {
+                icon: '${context2}/images/icons/add.png',
+                handler: function() {
                     fwModel.setReadOnly(false);
                     fwVersion.setReadOnly(false);
                     fwReleaseDate.setReadOnly(false);
@@ -464,13 +467,13 @@
             },
             {
                 text: '<fmt:message key="button.delete"/>',
-                icon: '/styles/icons/fam/delete.gif',
-                handler: function () {
+                icon: '${context2}/styles/icons/fam/delete.gif',
+                handler: function() {
                     var selected = firmwareGrid.getSelectionModel().getSelection();
                     var ids = [];
                     var isCheck = false;
                     var count = 0;
-                    Ext.each(selected, function (item) {
+                    Ext.each(selected, function(item) {
                         isCheck = true;
                         //arrayList =arrayList+ '&deleteIds='+(item.get('id'));
                         if (item.get('usageNo') == 0 && item.get('policies') == "") {
@@ -484,13 +487,13 @@
                         Ext.MessageBox.alert('<fmt:message key="message.status"/>', '<fmt:message key="message.delete.select"/>');
                     } else {
                         if (count == 0) {
-                            Ext.Msg.confirm('<fmt:message key="message.confirm"/>', '<fmt:message key="message.delete.confirm"/>', function (e) {
+                            Ext.Msg.confirm('<fmt:message key="message.confirm"/>', '<fmt:message key="message.delete.confirm"/>', function(e) {
                                 if (e == 'yes') {
                                     FirmwareController.deleteItems(ids);
                                 }
                             });
                         } else {
-                            Ext.Msg.confirm('<fmt:message key="message.confirm"/>', '<fmt:message key="message.firmware.nodelete2"/>', function (e) {
+                            Ext.Msg.confirm('<fmt:message key="message.confirm"/>', '<fmt:message key="message.firmware.nodelete2"/>', function(e) {
                                 if (e == 'yes') {
                                     FirmwareController.deleteItems(ids);
                                 }
@@ -503,7 +506,7 @@
             }
         ],
         listeners: {
-            itemdblclick: function (dv, record, item, index, e) {
+            itemdblclick: function(dv, record, item, index, e) {
                 var rec = record;
                 fwModel.setReadOnly(true);
                 fwVersion.setReadOnly(true);
@@ -683,14 +686,14 @@
             {
                 text: '<fmt:message key="button.reset"/>',
                 id: 'btnCancel',
-                handler: function () {
+                handler: function() {
                     detailForm.getForm().reset();
                     // Ext.getCmp('btnDelete').setDisabled(true);
                 }
             }
         ],
         listeners: {
-            afterRender: function (thisForm, options) {
+            afterRender: function(thisForm, options) {
                 this.keyNav = Ext.create('Ext.util.KeyNav', this.el, {
                     enter: FirmwareController.saveFirmware
                 });
@@ -708,13 +711,13 @@
         items: [detailForm],
         closeAction: 'hide',
         listeners: {
-            'close': function (panel, eOpts) {
+            'close': function(panel, eOpts) {
             },
-            show: function (panel, eOpts) {
+            show: function(panel, eOpts) {
                 modelStore.clearFilter();
                 firmwarePopup.setHeight(detailForm.getHeight() + 30);
             },
-            beforehide: function (thisForm, options) {
+            beforehide: function(thisForm, options) {
                 console.log("beforehide");
                 detailForm.getForm().reset();
             },

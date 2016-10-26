@@ -156,7 +156,7 @@ public class DeviceAction extends BaseAction {
                 deviceManager.remove(Long.parseLong(idTmp));
             }
             result.put("deleteStatus", "success");
-            saveActionLogs(Device.class.getSimpleName(), ActionTypeEnum.DELETE, "IDs = " + itemIdList);
+//            saveActionLogs(Device.class.getSimpleName(), ActionTypeEnum.DELETE, "IDs = " + itemIdList);
             return new ByteArrayInputStream(result.toString().getBytes("UTF8"));
         } catch (Exception ex) {
             log.error("ERROR getDeleteDevice: ", ex);
@@ -178,7 +178,7 @@ public class DeviceAction extends BaseAction {
             JSONObject result = getDeviceResponseMessage(ActionTypeEnum.CONFIG_SERVICE, acsResponse.getErrorCode());
             log.debug("getConfigDevice: " + deviceSerialNumber
                     + "- ErrorCode: " + acsResponse.getErrorCode() + " - Message: " + acsResponse.getMessage());
-            saveActionLogs(Device.class.getSimpleName(), ActionTypeEnum.CONFIG_SERVICE, "S/N = " + deviceSerialNumber);
+           // saveActionLogs(Device.class.getSimpleName(), ActionTypeEnum.CONFIG_SERVICE, "S/N = " + deviceSerialNumber);
             return new ByteArrayInputStream(result.toString().getBytes("UTF8"));
         } catch (Exception ex) {
             log.error("ERROR getConfigDevice: ", ex);
@@ -198,7 +198,7 @@ public class DeviceAction extends BaseAction {
             JSONObject result = getDeviceResponseMessage(ActionTypeEnum.RESTART_DEVICE, acsResponse.getErrorCode());
             log.debug("getRestartDevice: " + deviceSerialNumber
                     + "- ErrorCode: " + acsResponse.getErrorCode() + " - Message: " + acsResponse.getMessage());
-            saveActionLogs(Device.class.getSimpleName(), ActionTypeEnum.RESTART_DEVICE, "S/N = " + deviceSerialNumber);
+//            saveActionLogs(Device.class.getSimpleName(), ActionTypeEnum.RESTART_DEVICE, "S/N = " + deviceSerialNumber);
             return new ByteArrayInputStream(result.toString().getBytes("UTF8"));
         } catch (Exception ex) {
             log.error("ERROR getRestartDevice: ", ex);
@@ -264,11 +264,11 @@ public class DeviceAction extends BaseAction {
                 saveItem.setArea(areaManager.get(Long.parseLong(deviceDistrictId)));
             }
             deviceManager.save(saveItem);
-            if (actionType == ActionType.CREATE) {
-                saveActionLogs(Device.class.getSimpleName(), ActionTypeEnum.CREATE, "CREATE NEW DEVICE");
-            } else if (actionType == ActionType.EDIT) {
-                saveActionLogs(Device.class.getSimpleName(), ActionTypeEnum.UPDATE, "S/N = " + saveItem.getSerialNumber());
-            }
+//            if (actionType == ActionType.CREATE) {
+//                saveActionLogs(Device.class.getSimpleName(), ActionTypeEnum.CREATE, "CREATE NEW DEVICE");
+//            } else if (actionType == ActionType.EDIT) {
+//                saveActionLogs(Device.class.getSimpleName(), ActionTypeEnum.UPDATE, "S/N = " + saveItem.getSerialNumber());
+//            }
             JSONObject result = new JSONObject();
             result.put("saveStatus", "success");
             return new ByteArrayInputStream(result.toString().getBytes("UTF8"));

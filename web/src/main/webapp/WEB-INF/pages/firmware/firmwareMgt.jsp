@@ -8,7 +8,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" type="text/css" href="/scripts/extjs/ux/css/BoxSelect.css" />
+    <link rel="stylesheet" type="text/css" href="../scripts/extjs/ux/css/BoxSelect.css" />
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><fmt:message key="management.firmware.tittle"/></title>

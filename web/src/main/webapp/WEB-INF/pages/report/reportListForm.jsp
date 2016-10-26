@@ -4,10 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <script type="text/javascript">
+     <c:set var="context2" value="${pageContext.request.contextPath}" />
     Ext.Loader.setConfig({
         enabled: true
     });
-    Ext.Loader.setPath('Ext.ux', '/scripts/extjs/ux');
+    Ext.Loader.setPath('Ext.ux', '${context2}/scripts/extjs/ux');
     Ext.require([
         'Ext.grid.*',
         'Ext.data.*',

@@ -8,7 +8,7 @@
                 <packaging>ejb</packaging>
             </packagings>
             <goals>
-                <goal>jetty:run</goal>
+                <goal>tomcat:run</goal>
             </goals>
             <properties>
                 <skipTests>true</skipTests>
@@ -23,7 +23,7 @@
                 <packaging>ejb</packaging>
             </packagings>
             <goals>
-                <goal>jetty:run</goal>
+                <goal>tomcat:run</goal>
             </goals>
             <properties>
                 <skipTests>true</skipTests>

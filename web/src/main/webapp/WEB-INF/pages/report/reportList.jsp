@@ -13,7 +13,7 @@
     <head>
         <meta name="menu" content="reportMenu" />
         <title><fmt:message key="menu.report.title"/></title>
-        <link rel="stylesheet" type="text/css" href="/scripts/extjs/ux/css/BoxSelect.css" />
+        <link rel="stylesheet" type="text/css" href="upgradefw/scripts/extjs/ux/css/BoxSelect.css" />
     </head>
     <body class="home">
         <div id="tabs" class="x-hide-display">
