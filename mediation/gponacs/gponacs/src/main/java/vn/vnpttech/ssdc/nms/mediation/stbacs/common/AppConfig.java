@@ -124,4 +124,9 @@ public class AppConfig {
         int timeout = Integer.parseInt(prop.getProperty("ASYNC_TIMEOUT", "20000"));
         return timeout;
     }
+
+    public static boolean isAutoConfigurationGateway() {
+        String isDisable = prop.getProperty("AUTO_CONFIG_GATEWAY", "true");
+        return Boolean.valueOf(isDisable);
+    }
 }

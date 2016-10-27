@@ -21,6 +21,9 @@ public class DeviceInterface {
     private String ifType;
     private String ifKey;
     private String filterKey;
+    private String externalIp;
+    private String connectionType;
+    private String vlanId;
 
     public String getIfGroupKey() {
         return ifGroupKey;
@@ -77,7 +80,29 @@ public class DeviceInterface {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
-    
+
+    public String getExternalIp() {
+        return externalIp;
+    }
+
+    public void setExternalIp(String externalIp) {
+        this.externalIp = externalIp;
+    }
+
+    public String getConnectionType() {
+        return connectionType;
+    }
+
+    public void setConnectionType(String connectionType) {
+        this.connectionType = connectionType;
+    }
+
+    public String getVlanId() {
+        return vlanId;
+    }
+
+    public void setVlanId(String vlanId) {
+        this.vlanId = vlanId;
+    }
+
 }

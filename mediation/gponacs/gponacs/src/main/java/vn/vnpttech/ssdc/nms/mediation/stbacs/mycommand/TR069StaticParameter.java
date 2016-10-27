@@ -7,6 +7,8 @@ public class TR069StaticParameter {
 	public final static String EVENT_4 = "4 VALUE CHANGE";
 	public final static String EVENT_6 = "6 CONNECTION REQUEST";
 	public final static String EVENT_7 = "7 TRANSFERCOMPLETE";
+        
+        public static final String M_BOOT = "M Reboot";
 	
 	public final static String IPoE_TYPE = "IPoE";
 	public final static String PPPoE_TYPE = "PPPoE";

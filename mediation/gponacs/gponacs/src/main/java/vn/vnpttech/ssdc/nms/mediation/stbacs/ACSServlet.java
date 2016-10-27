@@ -72,9 +72,10 @@ import vn.vnpttech.ssdc.nms.mediation.stbacs.executor.STBNMSWorker;
 import vn.vnpttech.ssdc.nms.mediation.stbacs.http.ACSAuthenticator;
 import vn.vnpttech.ssdc.nms.mediation.stbacs.message.SetParameterValuesResponse;
 import vn.vnpttech.ssdc.nms.mediation.stbacs.mycommand.ZeroTouchCommand;
-import static vn.vnpttech.ssdc.nms.mediation.stbacs.services.ACSServiceImpl.deviceManager;
+import vn.vnpttech.ssdc.nms.mediation.stbacs.services.ServiceConfigGateway;
 import vn.vnpttech.ssdc.nms.mediation.stbacs.utils.BeanUtils;
 import vn.vnpttech.ssdc.nms.mediation.stbacs.utils.ConfigUtils;
+import vn.vnpttech.ssdc.nms.mediation.stbacs.ws.model.ModemInterfaceGroups;
 import vn.vnpttech.ssdc.nms.model.Device;
 import vn.vnpttech.ssdc.nms.model.DeviceModel;
 import vn.vnpttech.ssdc.nms.model.PolicyHistory;
@@ -325,6 +326,17 @@ public class ACSServlet extends HttpServlet {
 
         return returnValue;
     }
+
+    private String getCommandKey(Iterator<Entry<String, String>> iter, String event) {
+        String result = null;
+        while (iter.hasNext()) {
+            Entry<String, String> temp = iter.next();
+            if (temp.getKey().equals(event)) {
+                result = temp.getValue().toString();
+            }
+        }
+        return result;
+    }
     protected static ThreadLocal<MessageFactory> MSG_FACTORY = new ThreadLocal<MessageFactory>() {
         @Override
         protected MessageFactory initialValue() {
@@ -368,7 +380,10 @@ public class ACSServlet extends HttpServlet {
             String serialNumber = "";
             if (lastInform != null) {
                 serialNumber = lastInform.sn;
+                
             }
+
+            
 
             if (f.next()) {
                 try {
@@ -576,10 +591,27 @@ public class ACSServlet extends HttpServlet {
                                             setParam.AddValue(startPath + "WlSsid", nameWifi, "xsd:string");
                                         }
                                         setParam.writeTo(out);
+                                    } else {
+                                        String eventSetDefault = (String) session.getAttribute(ServiceConfigGateway.NOTE);
+                                        if (eventSetDefault == null) {
+                                            configGateWay(serialNumber);
+                                        } else {
+                                            System.out.println("event setdegfault " + eventSetDefault);
+                                            logger.info("Device is set gateway and reboot");
+                                        }
                                     }
                                     long endTime = System.currentTimeMillis();
                                     logger.info("[Disable wifi vionaphone] TIME  = " + (endTime - startTime));
 //                                logger.warn("GetParameterValuesResponse but Command is null ??? Please check !");
+                                } else if (AppConfig.isAutoConfigurationGateway()) {
+                                    // th bi loi khi disable wifi van thuc hien config gatwway
+                                    String eventSetDefault = (String) session.getAttribute(ServiceConfigGateway.NOTE);
+                                    if (eventSetDefault == null) {
+                                        configGateWay(serialNumber);
+                                    } else {
+
+                                        logger.info("Device is set gateway and reboot");
+                                    }
                                 }
                             }
                             SendResponse(session, msg);
@@ -604,6 +636,14 @@ public class ACSServlet extends HttpServlet {
                                     logService.setResult("FAILED");
                                 }
                                 serviceLogManager.save(logService);
+                                // sau khi set disable wifi thang cong thi thuc hien config gateway
+                                String eventSetDefault = (String) session.getAttribute(ServiceConfigGateway.NOTE);
+                                if (eventSetDefault == null) {
+                                    configGateWay(serialNumber);
+                                } else {
+
+                                    logger.info("Device is set gateway and reboot");
+                                }
                             }
 
                             if (cm != null) {
@@ -706,6 +746,18 @@ public class ACSServlet extends HttpServlet {
                             SendResponse(session, msg);
                         } else if (reqname.equals("Fault")) {
                             Command cm = CommandRequestFactory.getCommand(lastInform.sn);
+                            String eventDisabel = (String) session.getAttribute(ATTR_EVENT_DISALBE_WIFI);
+                            if (eventDisabel != null && eventDisabel.equals(EVENT_DISABLE)) {
+                                // th cau hinh wifi bi loi van thuc hien cau hinh defaul gatwway
+                                String eventSetDefault = (String) session.getAttribute(ServiceConfigGateway.NOTE);
+                                if (eventSetDefault == null) {
+                                    configGateWay(serialNumber);
+                                } else {
+
+                                    logger.info("Device is set gateway and reboot");
+                                }
+                            }
+
                             if (cm != null) {
                                 cm.receiveError(msg.toString());
                                 sb.setLength(0);
@@ -771,15 +823,12 @@ public class ACSServlet extends HttpServlet {
                                 .append(", Update exists device !");
                         logger.info(sb);
                         String productClass = lastInform.ProductClass;
-                        long s = System.currentTimeMillis();
                         String VNPTname = ConfigUtils.getInstance().getModelName(productClass);
                         DeviceModel model = ModelCache.mapCacheModel.get(VNPTname);
                         if (model == null) {
                             model = deviceModelManager.getModelByName(VNPTname);
                             ModelCache.mapCacheModel.put(VNPTname, model);
                         }
-                        long s1 = System.currentTimeMillis();
-                        logger.info("TIME TO GET MODEL BY NAME" + (s1 - s));
                         if (model == null) {
                             model = new DeviceModel();
                             model.setName(VNPTname);
@@ -793,10 +842,7 @@ public class ACSServlet extends HttpServlet {
                         device.setFirmwareVersion(lastInform.getSoftwareVersion());
                         device.setConnectionReq(lastInform.getConnectionRequestURL());
                         device.setIpAddress(getIPfromConnectionRequest(lastInform.getConnectionRequestURL()));
-                        long schen = System.currentTimeMillis();
                         deviceManager.save(device);
-                        long schen1 = System.currentTimeMillis();
-                        logger.info("TIME TO UPDATE DEVICE = " + (schen1 - schen));
                     } else {
                         sb.setLength(0);
                         sb.append("EVENT_0: BOOTSTRAP")
@@ -807,15 +853,12 @@ public class ACSServlet extends HttpServlet {
                                 .append(", Create New Device");
                         logger.info(sb.toString());
                         String productClass = lastInform.ProductClass;
-                        long s0 = System.currentTimeMillis();
                         String VNPTname = ConfigUtils.getInstance().getModelName(productClass);
                         DeviceModel model = ModelCache.mapCacheModel.get(VNPTname);
                         if (model == null) {
                             model = deviceModelManager.getModelByName(VNPTname);
                             ModelCache.mapCacheModel.put(VNPTname, model);
                         }
-                        long s1 = System.currentTimeMillis();
-                        logger.info("TIME TO GET MODEL BY NAME" + (s1 - s0));
                         if (model == null) {
                             model = new DeviceModel();
                             model.setName(VNPTname);
@@ -829,10 +872,7 @@ public class ACSServlet extends HttpServlet {
                         device.setFirmwareVersion(lastInform.getSoftwareVersion());
                         device.setConnectionReq(lastInform.getConnectionRequestURL());
                         device.setIpAddress(getIPfromConnectionRequest(lastInform.getConnectionRequestURL()));
-                        long schen = System.currentTimeMillis();
                         deviceManager.insertDevice(device);
-                        long schen1 = System.currentTimeMillis();
-                        logger.info("TIME TO SAVE DEVICE = " + (schen1 - schen));
                     }
                     long moinhe = System.currentTimeMillis();
                     if (AppConfig.isDisableWifiVinaphone()) {
@@ -847,6 +887,16 @@ public class ACSServlet extends HttpServlet {
                 } // check has EVENT_1
                 else if (hasEvent(lastInform.getEvents().iterator(), TR069StaticParameter.EVENT_1)) {
                     String event = TR069StaticParameter.EVENT_1;
+
+                    // get commakey 
+                    // neu commkey for boot = null thi thuc hien boot nhw binh thuong
+                    // neu commkey for boot !=null thi set them thuoc tinh default_gateway de ngan service thuc hien lai viec set service
+                    String commandKeyForMBoot = getCommandKey(lastInform.getEvents().iterator(), TR069StaticParameter.M_BOOT);
+                    logger.info(" ....  commadnkey for mboot " + commandKeyForMBoot);
+                    if (commandKeyForMBoot != null) {
+                        session.setAttribute(ServiceConfigGateway.NOTE, ServiceConfigGateway.NOTE);
+                    }
+
                     Command cm = CommandRequestFactory.getCommand(lastInform.sn);
                     if (cm != null) {
                         if (Command.TYPE_UPGRADE_FW.equals(cm.getType())) {
@@ -939,10 +989,7 @@ public class ACSServlet extends HttpServlet {
                         device.setFirmwareVersion(lastInform.getSoftwareVersion());
                         device.setConnectionReq(lastInform.getConnectionRequestURL());
                         device.setIpAddress(getIPfromConnectionRequest(lastInform.getConnectionRequestURL()));
-                        long schen = System.currentTimeMillis();
                         deviceManager.insertDevice(device);
-                        long schen1 = System.currentTimeMillis();
-                        logger.info("TIME TO SAVE DEVICE = " + (schen1 - schen));
 
                     }
                     if (AppConfig.isDisableWifiVinaphone()) {
@@ -952,6 +999,7 @@ public class ACSServlet extends HttpServlet {
                         getParam.writeTo(out);
                         session.setAttribute(ATTR_EVENT_DISALBE_WIFI, EVENT_DISABLE);
                     }
+
                 }
                 // check has EVENT_4
                 if (hasEvent(lastInform.getEvents().iterator(), TR069StaticParameter.EVENT_4)) {
@@ -1044,6 +1092,11 @@ public class ACSServlet extends HttpServlet {
                         } else if (cm.getType().equals(Command.TYPE_REBOOT)) {
                             //RebootCommand rbCmd = (RebootCommand)cm;
                             Reboot recm = new Reboot();
+                            if (cm.getNote() != null) {
+                                if (cm.getNote().equals(ServiceConfigGateway.NOTE)) {
+                                    recm.CommandKey = cm.getNote();
+                                }
+                            }
                             recm.writeTo(out);
                         } else if (cm.getType().equals(Command.TYPE_ZERO_TOUCH)) {
                             //ZeroTouchCommand_GPON command = (ZeroTouchCommand_GPON) cm;
@@ -1385,5 +1438,54 @@ public class ACSServlet extends HttpServlet {
             }
         }
         return null;
+    }
+
+    public void configGateWay(String serialNumber) throws Exception {
+        if (AppConfig.isAutoConfigurationGateway()) {
+            ServiceLog logService = new ServiceLog();
+            logService.setActionStartTime(new Date());
+            logService.setSerialNumber(serialNumber);
+            logService.setActionName("Auto config gateway");
+            // send getparametevalues to get value default gateway
+            Device device = deviceManager.getDeviceBySerialNumber(serialNumber);
+            if (device != null) {
+                logService.setIpDevice(device.getIpAddress());
+            }
+            if (device != null) {
+                ModemInterfaceGroups ig = ServiceConfigGateway.getDeviceInterfaceGroups(device.getSerialNumber(), device.getConnectionReq());
+                if (ig != null) {
+                    String defaultGateway = ServiceConfigGateway.chooseDefautGateway(ig);
+                    if (defaultGateway == null) {
+                        logger.warn("ChangeDefaultGateway fail, cant find default interface");
+                        // cap nhat status change default gateway
+                        logService.setActionEndTime(new Date());
+                        logService.setResult("FAILED");
+                        logService.setError("ChangeDefaultGateway fail, cant find default interface");
+                    } else {
+                        try {
+                            ServiceConfigGateway.configDefautGateway(device, defaultGateway);
+                            logService.setActionEndTime(new Date());
+                            logService.setResult("SUCCESS");
+                        } catch (Exception ex) {
+                            logger.error("configDefautGateway has exception", ex);
+                            logService.setActionEndTime(new Date());
+                            logService.setResult("FAILED");
+                            logService.setError(ex.getMessage());
+                        }
+                    }
+                } else {
+                    logger.info("ModemInterfaceGroups null");
+                    logService.setActionEndTime(new Date());
+                    logService.setResult("FAILED");
+                    logService.setError("ModemInterfaceGroups null");
+                }
+            }
+            if (device == null) {
+                logService.setActionEndTime(new Date());
+                logService.setResult("FAILED");
+                logService.setError("Cannot get infor about device with serial " + serialNumber);
+            }
+            serviceLogManager.save(logService);
+        }
     }
 }
