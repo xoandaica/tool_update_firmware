@@ -163,6 +163,24 @@ public class DeviceAction extends BaseAction {
             return null;
         }
     }//End
+
+    public InputStream getDeleteAllDevice() {
+        try {
+
+            JSONObject result = new JSONObject();
+            int count1 = 0;
+            count1 = policyHistoryManager.deleteAllPolicyHistory();
+            if (count1 > -1) {
+                deviceManager.deleletAll();
+            }
+            result.put("deleteStatus", "success");
+//            saveActionLogs(Device.class.getSimpleName(), ActionTypeEnum.DELETE, "IDs = " + itemIdList);
+            return new ByteArrayInputStream(result.toString().getBytes("UTF8"));
+        } catch (Exception ex) {
+            log.error("ERROR getDelete All Device: ", ex);
+            return null;
+        }
+    }//End
     //Config Device 
 
     public InputStream getConfigDevice() {
@@ -178,7 +196,7 @@ public class DeviceAction extends BaseAction {
             JSONObject result = getDeviceResponseMessage(ActionTypeEnum.CONFIG_SERVICE, acsResponse.getErrorCode());
             log.debug("getConfigDevice: " + deviceSerialNumber
                     + "- ErrorCode: " + acsResponse.getErrorCode() + " - Message: " + acsResponse.getMessage());
-           // saveActionLogs(Device.class.getSimpleName(), ActionTypeEnum.CONFIG_SERVICE, "S/N = " + deviceSerialNumber);
+            // saveActionLogs(Device.class.getSimpleName(), ActionTypeEnum.CONFIG_SERVICE, "S/N = " + deviceSerialNumber);
             return new ByteArrayInputStream(result.toString().getBytes("UTF8"));
         } catch (Exception ex) {
             log.error("ERROR getConfigDevice: ", ex);
@@ -336,7 +354,7 @@ public class DeviceAction extends BaseAction {
             return null;
         }
     }//EndF
-    
+
     public InputStream getConfigAcsUrl() {
         try {
             HttpServletRequest request = getRequest();
@@ -361,8 +379,8 @@ public class DeviceAction extends BaseAction {
             return null;
         }
     }//EndF
-    
-      public InputStream getStaticRoute() {
+
+    public InputStream getStaticRoute() {
         try {
             HttpServletRequest request = getRequest();
             List<Device> devices = null;
@@ -371,7 +389,7 @@ public class DeviceAction extends BaseAction {
             String gateway = request.getParameter("gateway");
             String subnetMark = request.getParameter("subnetMark");
             String interfaceName = request.getParameter("interfaceName");
-            
+
             if (StringUtils.isNotBlank(idList)) {
                 devices = deviceManager.getDeviceByIdList(idList);
             } else {
@@ -380,7 +398,7 @@ public class DeviceAction extends BaseAction {
 
             if (devices != null) {
                 SimpleThreadPool StaticRoute = new SimpleThreadPool();
-                StaticRoute.setStaticRoute(devices,destIp,gateway,subnetMark,interfaceName);
+                StaticRoute.setStaticRoute(devices, destIp, gateway, subnetMark, interfaceName);
             }
 
             JSONObject result = new JSONObject();
@@ -391,6 +409,5 @@ public class DeviceAction extends BaseAction {
             return null;
         }
     }//EndF
-    
-    
+
 }

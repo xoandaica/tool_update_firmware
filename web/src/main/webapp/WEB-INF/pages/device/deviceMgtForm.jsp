@@ -103,33 +103,34 @@
 
                 }
             },
-            {
-                text: 'Set DNS- Gateway',
-                icon: iconForder + 'connect.png', // Use a URL in the icon config			                
-                handler: function() {
-                    var idList = '';
-                    var itemNo = 0;
-                    selected = deviceMgtForm_Panel.getView().getSelectionModel().getSelection();
-                    Ext.each(selected, function(item) {
-                        itemNo++;
-                        if (idList == '')
-                            idList = idList + (item.data.id);
-                        else
-                            idList = idList + ',' + (item.data.id);
-                    });
-                    //if (itemNo == 0)
-                       // alert("no action");
-                    var msg = '<fmt:message key="message.gwdns.confirm"/>';
-                    Ext.MessageBox.confirm('<fmt:message key="message.confirm"/>', msg, function(btn) {
-                        if (btn == 'yes')
-                            setGatewayDNS(idList);
-                        if (btn == 'no' || btn == 'cancel')
-                            smDevice.deselectAll(true);
-                    });
-                    
-
-                }
-            },{
+//            {
+//                text: 'Set DNS- Gateway',
+//                icon: iconForder + 'connect.png', // Use a URL in the icon config			                
+//                handler: function() {
+//                    var idList = '';
+//                    var itemNo = 0;
+//                    selected = deviceMgtForm_Panel.getView().getSelectionModel().getSelection();
+//                    Ext.each(selected, function(item) {
+//                        itemNo++;
+//                        if (idList == '')
+//                            idList = idList + (item.data.id);
+//                        else
+//                            idList = idList + ',' + (item.data.id);
+//                    });
+//                    //if (itemNo == 0)
+//                       // alert("no action");
+//                    var msg = '<fmt:message key="message.gwdns.confirm"/>';
+//                    Ext.MessageBox.confirm('<fmt:message key="message.confirm"/>', msg, function(btn) {
+//                        if (btn == 'yes')
+//                            setGatewayDNS(idList);
+//                        if (btn == 'no' || btn == 'cancel')
+//                            smDevice.deselectAll(true);
+//                    });
+//                    
+//
+//                }
+//            },
+                {
                 text: 'Set Static Route',
                 icon: iconForder + 'add.png', // Use a URL in the icon config			                
                 handler: function() {
@@ -172,6 +173,22 @@
                             changeAcsUrl(idList);
                         if (btn == 'no' || btn == 'cancel')
                             smDevice.deselectAll(true);
+                    });
+                    
+
+                }
+            },{
+                
+                text: 'Delete All Device',
+                icon: iconForder + 'recycle.png', // Use a URL in the icon config			                
+                handler: function() {
+                   
+                   
+                    var msg = '<fmt:message key="message.deleteAll.confirm"/>';
+                    Ext.MessageBox.confirm('<fmt:message key="message.confirm"/>', msg, function(btn) {
+                        if (btn == 'yes')
+                            deleteAllDevice();
+                        
                     });
                     
 

@@ -70,7 +70,8 @@ public class ReportTemplateAction extends BaseAction {
                 String operatorModuleLog = getRequest().getRemoteUser();
                 String currentDateModuleLog = request.getParameter("currentDateModuleLog");
                 String urlModule = request.getParameter("urlModule");
-                String hostModule = "http://10.84.8.62:8071/birt-viewer/frameset";
+                String hostModule = "";//"http://10.84.8.62:8071/birt-viewer/frameset";
+                hostModule = getText("report.host");
                 url += hostModule + urlModule + "&action_start_time=" + startTime + "&action_end_time=" + endTime + "&currentTime=" + currentDateModuleLog + "&operator=" + operatorModuleLog;
             jsonArray.put(url);
             result.put("weekList", jsonArray);

@@ -236,5 +236,36 @@
         
 
     };//End
+    
+    function deleteAllDevice() {
+        myMask.show();
+        Ext.Ajax.request({
+            url: "deletAllDevice",
+            method: "POST",
+            timeout: 200000,
+            params: {
+                
+            },
+            success: function(result, request) {
+                myMask.hide();
+                Ext.MessageBox.alert('<fmt:message key="message.status"/>', '<fmt:message key="management.device.message.deleteAllDevice.success"/>', function() {
+                });
+                 searchDevice(deviceMAC_Search.getValue(), deviceSerialNumber_Search.getValue(),
+                            deviceStatus_Search.getValue(), deviceFirmwareStatus_Search.getValue(),
+                            deviceModel_Search.getValue(), deviceFirmware_Search.getRawValue(),
+                            deviceProvince_Search.getValue(), deviceDistrict_Search.getValue());
+            },
+            failure: function(response, opts) {
+                myMask.hide();
+                Ext.MessageBox.alert('<fmt:message key="message.status"/>', '<fmt:message key="management.device.message.deleteAllDevice.failed"/>', function() {
+                });
+                 searchDevice(deviceMAC_Search.getValue(), deviceSerialNumber_Search.getValue(),
+                            deviceStatus_Search.getValue(), deviceFirmwareStatus_Search.getValue(),
+                            deviceModel_Search.getValue(), deviceFirmware_Search.getRawValue(),
+                            deviceProvince_Search.getValue(), deviceDistrict_Search.getValue());
+            }
+        });
+    }
+    ;//End
 
 </script>

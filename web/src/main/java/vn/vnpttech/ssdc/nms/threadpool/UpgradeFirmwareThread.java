@@ -69,6 +69,7 @@ public class UpgradeFirmwareThread implements Runnable {
             if (firmware != null && !firmware.getVersion().equalsIgnoreCase(device.getFirmwareVersion())) {
                 log.info("Current Firmware: " + device.getFirmwareVersion());
                 log.info("Up to Firmware : " + firmware.getVersion());
+                log.info("Firmware path: " + firmware.getFirmwarePath());
                 log.debug(device.getSerialNumber() + " calling web service......");
                 acs.getACSServiceImplPort().upgradeFirmware(device.getSerialNumber(), device.getConnectionReq(), firmware.getFirmwarePath(), firmware.getVersion(), "", "");
                 log.debug(device.getSerialNumber() + " called web service......");

@@ -418,6 +418,11 @@
                 <param name="inputName">deviceUpdateFirmwareHistory</param>
             </result>
         </action>
+        <action name="deletAllDevice" class="deviceAction">
+            <result type="stream">
+                <param name="inputName">deleteAllDevice</param>
+            </result>
+        </action>
         
     </package>
     

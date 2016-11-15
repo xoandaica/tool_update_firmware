@@ -33,7 +33,7 @@
             name: 'currentDate',
             id: 'currentDate',
             anchor: '99%',
-            format: 'Y-m-d h:i',
+            format: 'Y-m-d h:i:s',
             padding: '5 15 5 15',
         });
         var currentDateModuleLog = Ext.create('Ext.form.field.Date', {
@@ -41,32 +41,34 @@
             name: 'currentDateModuleLog',
             id: 'currentDateModuleLog',
             anchor: '99%',
-            format: 'Y-m-d h:i',
+            format: 'Y-m-d h:i:s',
             padding: '5 15 5 15',
             readOnly: true,
         });
 
-        var comboStartTime = Ext.create('Ext.form.DateField', {
+        var comboStartTime = Ext.create('Ext.ux.form.DateTimeField', {
             fieldLabel: 'Start Time:',
             name: 'startTime',
             id: 'startTime',
             anchor: '99%',
-            format: 'Y-m-d H:i:s',
+            format: 'Y-m-d',
             padding: '5 15 5 15',
             allowBlank: false,
-            maxValue: Ext.Date.add(new Date(), Ext.Date.DAY, -1),
-            minValue: Ext.Date.add(new Date(), Ext.Date.DAY, -30)
+            //maxValue: Ext.Date.add(new Date(), Ext.Date.DAY, -1),
+            //minValue: Ext.Date.add(new Date(), Ext.Date.DAY, -30)
         });
-        var comboEndTime = Ext.create('Ext.form.field.Date', {
+        var comboEndTime = Ext.create('Ext.ux.form.DateTimeField', {
             fieldLabel: 'End Time:',
             name: 'endTime',
             id: 'endTime',
             anchor: '99%',
-            format: 'Y-m-d h:i',
+            format: 'Y-m-d',
             padding: '5 15 5 15',
             allowBlank: false,
-            maxValue: new Date(),
+          //  maxValue: new Date(),
         });
+        
+        
 
         var newCreateReportDialogModuleLog = Ext.create('Ext.window.Window', {
             closeAction: 'hide',
@@ -668,9 +670,10 @@
                 }, {
                     text: 'Export',
                     xtype: 'actioncolumn',
-                    width: 80,
+                    flex: 1,
                     items: [{
                             icon: '<c:url value="/styles/icons/fam/rss_go.png"/>', // Use a URL in the icon config
+                            text: 'Export',
                             tooltip: 'Export Report',
                             centered: true,
                             handler: function (grid, rowIndex, colIndex) {
