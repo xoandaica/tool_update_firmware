@@ -62,6 +62,7 @@
                             </includes>
                         </resource>
                     </webResources>
+                    <!--<skipTests>true</skipTests>-->
                 </configuration>
             </plugin>
             <plugin>

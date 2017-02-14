@@ -25,11 +25,12 @@
                 <prop key="hibernate.hikari.maximumPoolSize">100</prop>
                 <prop key="hibernate.hikari.idleTimeout">30000</prop>
                 <prop key="hibernate.hikari.dataSourceClassName">com.mysql.jdbc.jdbc2.optional.MysqlDataSource</prop>
-                <prop key="hibernate.hikari.dataSource.url">jdbc:mysql://stbnms-db/gponnms</prop> 
+                <!--<prop key="hibernate.hikari.dataSource.url">jdbc:mysql://stbnms-db/gponnms</prop>-->
+                <prop key="hibernate.hikari.dataSource.url">jdbc:mysql://10.84.8.62/gponnms</prop>
                 <!--<prop key="hibernate.hikari.dataSource.url">jdbc:mysql://localhost/stbnms?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true</prop>-->
                 <prop key="hibernate.hikari.dataSource.user">stbnms</prop>
                 <prop key="hibernate.hikari.dataSource.password">nms@123</prop>
-                
+
             </props>
             <!-- Turn batching off for better error messages under PostgreSQL -->
             <!-- hibernate.jdbc.batch_size=0 -->

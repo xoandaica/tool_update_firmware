@@ -74,6 +74,7 @@
             <groupId>org.subethamail</groupId>
             <artifactId>subethasmtp-wiser</artifactId>
             <scope>test</scope>
+            <version>1.2</version>
         </dependency>
     </dependencies>
 
@@ -99,7 +100,7 @@
         <jdbc.url>
             <![CDATA[jdbc:mysql://gponnms-db-mysql/${db.name}?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true]]>
         </jdbc.url>
-        <jdbc.username>root</jdbc.username>
+        <jdbc.username>stbnms</jdbc.username>
         <!--<jdbc.password></jdbc.password>-->
         <jdbc.password>nms@123</jdbc.password>
         <jdbc.validationQuery><![CDATA[SELECT 1 + 1]]></jdbc.validationQuery>

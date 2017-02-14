@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -75,14 +76,14 @@
             <artifactId>appfuse-data-common</artifactId>
             <version>${appfuse.version}</version>
             <type>pom</type>
-            
+
         </dependency>
         <dependency>
             <groupId>org.appfuse</groupId>
             <artifactId>appfuse-service</artifactId>
             <version>${appfuse.version}</version>
             <type>pom</type>
-            
+
             <exclusions>
                 <exclusion>
                     <groupId>org.appfuse</groupId>
@@ -95,12 +96,12 @@
             <artifactId>appfuse-${dao.framework}</artifactId>
             <version>${appfuse.version}</version>
             <type>pom</type>
-           
+
         </dependency>
         <dependency>
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
-            <version>3.18.1-GA</version> 
+            <version>3.18.1-GA</version>
         </dependency>
         <dependency>
             <groupId>javax.ws.rs</groupId>
@@ -108,11 +109,10 @@
             <version>2.0</version>
         </dependency>
         <dependency>
-            <groupId>c3p0</groupId>
+            <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
             <version>0.9.5.2</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-c3p0 -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -127,9 +127,9 @@
             <version>0.2.11</version>
         </dependency>
         <dependency>
-            <groupId>vnpt.hikaricp</groupId>
-            <artifactId>hikari</artifactId>
-            <version>2.4.3</version>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>2.5.1</version>
         </dependency>
     </dependencies>
 </project>

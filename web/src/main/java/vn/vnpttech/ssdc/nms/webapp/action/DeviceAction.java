@@ -164,23 +164,23 @@ public class DeviceAction extends BaseAction {
         }
     }//End
 
-    public InputStream getDeleteAllDevice() {
-        try {
-
-            JSONObject result = new JSONObject();
-            int count1 = 0;
-            count1 = policyHistoryManager.deleteAllPolicyHistory();
-            if (count1 > -1) {
-                deviceManager.deleletAll();
-            }
-            result.put("deleteStatus", "success");
-//            saveActionLogs(Device.class.getSimpleName(), ActionTypeEnum.DELETE, "IDs = " + itemIdList);
-            return new ByteArrayInputStream(result.toString().getBytes("UTF8"));
-        } catch (Exception ex) {
-            log.error("ERROR getDelete All Device: ", ex);
-            return null;
-        }
-    }//End
+//    public InputStream getDeleteAllDevice() {
+//        try {
+//
+//            JSONObject result = new JSONObject();
+//            int count1 = 0;
+//            count1 = policyHistoryManager.deleteAllPolicyHistory();
+//            if (count1 > -1) {
+//                deviceManager.deleletAll();
+//            }
+//            result.put("deleteStatus", "success");
+////            saveActionLogs(Device.class.getSimpleName(), ActionTypeEnum.DELETE, "IDs = " + itemIdList);
+//            return new ByteArrayInputStream(result.toString().getBytes("UTF8"));
+//        } catch (Exception ex) {
+//            log.error("ERROR getDelete All Device: ", ex);
+//            return null;
+//        }
+//    }//End
     //Config Device 
 
     public InputStream getConfigDevice() {

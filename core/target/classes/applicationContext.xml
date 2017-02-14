@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       default-lazy-init="true">
+
+    <!-- Activates scanning of @Autowired -->
+    <context:annotation-config/>
+
+    <!-- Activates scanning of @Repository and @Service -->
+    <context:component-scan base-package="vn.vnpttech.ssdc.nms"/>
+
+    <!-- Add new DAOs here -->
+    <bean id="actionLogsDao" class="vn.vnpttech.ssdc.nms.dao.hibernate.ActionLogsDaoHibernate">
+    </bean>
+    <!--    <bean id="userDao" class="vn.vnpttech.ssdc.nms.dao.hibernate.UserDaoHibernate">
+    </bean>-->
+    <bean id="firmwareDao" class="vn.vnpttech.ssdc.nms.dao.hibernate.FirmwareDaoHibernate">
+    </bean>
+    <bean id="areaDao" class="vn.vnpttech.ssdc.nms.dao.hibernate.AreaDaoHibernate">
+    </bean>
+    <bean id="policyDao" class="vn.vnpttech.ssdc.nms.dao.hibernate.PolicyDaoHibernate">
+    </bean>
+    <bean id="deviceDao" class="vn.vnpttech.ssdc.nms.dao.hibernate.DeviceDaoHibernate">
+    </bean>
+    <bean id="deviceModelDao" class="vn.vnpttech.ssdc.nms.dao.hibernate.DeviceModelDaoHibernate">
+    </bean>
+    <bean id="areaDeviceMappingDao" class="vn.vnpttech.ssdc.nms.dao.hibernate.AreaDeviceMappingDaoHibernate">
+    </bean>
+    <bean id="policyHistoryDao" class="vn.vnpttech.ssdc.nms.dao.hibernate.PolicyHistoryDaoHibernate">
+    </bean>
+    <bean id="serviceLogDao" class="vn.vnpttech.ssdc.nms.dao.hibernate.ServiceLogDaoHibernate">
+    </bean>
+    <bean id="reportTemplateDao" class="vn.vnpttech.ssdc.nms.dao.hibernate.ReportTemplateDaoHibernate">
+    </bean>
+    
+    <!-- Add new Managers here -->
+    <bean id="actionLogsManager" class="vn.vnpttech.ssdc.nms.service.impl.ActionLogsManagerImpl">
+        <constructor-arg ref="actionLogsDao" />
+    </bean>
+    <bean id="areaManager" class="vn.vnpttech.ssdc.nms.service.impl.AreaManagerImpl">
+        <constructor-arg ref="areaDao" />
+    </bean> 
+    <bean id="firmwareManager" class="vn.vnpttech.ssdc.nms.service.impl.FirmwareManagerImpl">
+        <constructor-arg ref="firmwareDao" />
+    </bean> 
+    <bean id="policyManager" class="vn.vnpttech.ssdc.nms.service.impl.PolicyManagerImpl">
+        <constructor-arg ref="policyDao" />
+    </bean>
+    <bean id="deviceModelManager" class="vn.vnpttech.ssdc.nms.service.impl.DeviceModelManagerImpl">
+        <constructor-arg ref="deviceModelDao" />
+    </bean>
+    <bean id="areaDeviceMappingManager" class="vn.vnpttech.ssdc.nms.service.impl.AreaDeviceMappingManagerImpl">
+        <constructor-arg ref="areaDeviceMappingDao" />
+    </bean>
+    <bean id="deviceManager" class="vn.vnpttech.ssdc.nms.service.impl.DeviceManagerImpl">
+        <constructor-arg ref="deviceDao" />
+    </bean>
+    <bean id="policyHistoryManager" class="vn.vnpttech.ssdc.nms.service.impl.PolicyHistoryManagerImpl">
+        <constructor-arg ref="policyHistoryDao" />
+    </bean>
+    <bean id="serviceLogManager" class="vn.vnpttech.ssdc.nms.service.impl.ServiceLogManagerImpl">
+        <constructor-arg ref="serviceLogDao" />
+    </bean>
+    <bean id="reportTemplateManager" class="vn.vnpttech.ssdc.nms.service.impl.ReportTemplateManagerImpl">
+        <constructor-arg ref="reportTemplateDao" />
+    </bean>
+</beans>

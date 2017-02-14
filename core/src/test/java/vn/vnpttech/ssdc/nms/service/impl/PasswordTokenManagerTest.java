@@ -72,7 +72,7 @@ public class PasswordTokenManagerTest {
         }
         mailSender.setPort(smtpPort);
         return wiser;
-    }    
+    }
 
     @Before
     public void before() throws Exception {

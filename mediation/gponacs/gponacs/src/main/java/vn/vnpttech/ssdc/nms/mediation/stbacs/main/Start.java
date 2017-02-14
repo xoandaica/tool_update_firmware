@@ -25,7 +25,7 @@ public class Start {
     public static void main(String[] args) throws XMPPException, Exception {
 
         try {
-            PropertyConfigurator.configure("../etc/log4j.conf");
+            PropertyConfigurator.configure("E:/NMS/gnmstool/mediation/gponacs/etc/log4j.conf");
             Thread.currentThread().setName("GPON ACS Wrapper");
         } catch (Exception ex) {
             logger.info("Could not set Thread name", ex);
