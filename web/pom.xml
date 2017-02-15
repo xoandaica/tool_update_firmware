@@ -17,10 +17,10 @@
     <build>
         <plugins>
           
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>dbunit-maven-plugin</artifactId>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>dbunit-maven-plugin</artifactId>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>native2ascii-maven-plugin</artifactId>
@@ -70,8 +70,8 @@
                 <artifactId>tomcat-maven-plugin</artifactId>
                 <version>1.1</version>
                 <configuration>
-                    <path>/upgradefw</path>
-                    <port>8888</port>
+                    <path>/</path>
+                    <port>8080</port>
                     <uriEncoding>utf8</uriEncoding>
                 </configuration>
             </plugin>
